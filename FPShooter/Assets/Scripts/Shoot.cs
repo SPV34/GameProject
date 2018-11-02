@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;//подключение бибилиотеки для UI-системы 
 
 public class Shoot : MonoBehaviour {
 
@@ -9,8 +10,8 @@ public class Shoot : MonoBehaviour {
     void Start()
     {
         _camera = GetComponent<Camera>();//Доступ к компонентам
-        Cursor.lockState = CursorLockMode.Locked;//блокировка курсора
-        Cursor.visible = false; //скрываем указатель мыши
+        //Cursor.lockState = CursorLockMode.Locked;//блокировка курсора
+        //Cursor.visible = false; //скрываем указатель мыши
     }
 
     void OnGUI()
@@ -23,7 +24,7 @@ public class Shoot : MonoBehaviour {
    
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
         { //реакция на нажатие кнопки мыши
             Vector3 point = new Vector3(_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0); //середина экрана, половина ширины и высоты
             Ray ray = _camera.ScreenPointToRay(point);//Создание луча методом ScreenPointToRay.
